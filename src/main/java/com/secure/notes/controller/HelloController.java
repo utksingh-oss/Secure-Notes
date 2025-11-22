@@ -7,11 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 
+import static com.secure.notes.constant.ControllerConstant.*;
+
 @RestController
 public class HelloController {
-    private static final String HELLO_MESSAGE = "Hello %s";
-    private static final String MESSAGE = "message";
-    private static final String STATUS = "status";
 
     @GetMapping("/hello/{name}")
     public HashMap<String, String> sayHelloEndpoint(@PathVariable("name") String name) {
@@ -20,4 +19,5 @@ public class HelloController {
         responseMap.put(STATUS, HttpStatus.OK.toString());
         return responseMap;
     }
+
 }
