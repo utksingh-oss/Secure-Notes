@@ -88,3 +88,6 @@ public interface AuthenticationManager {
   - all the bits they want to configure as part of the custom security configuration
 
 
+Continue: https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118381#learning-tools
+
+

@@ -9,4 +9,5 @@ public class ControllerConstant {
             " This project will be using OAuth2 in the later stages ! Thank you!";
     public static final String COPYRIGHT_INFO = "© 2025 Your Company Name. All rights reserved.\n" +
             "Unauthorized copying, modification, or distribution is prohibited.\n";
+    public static final String ADMIN = "Admin";
 }

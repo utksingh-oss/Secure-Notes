@@ -25,6 +25,7 @@ public class SecurityConfiguration {
                 requests
                         .requestMatchers("/v1/hello/about").permitAll()
                         .requestMatchers("/v1/public/**").permitAll() // Any endpoint starting with public
+                        .requestMatchers("/v1/admin/**").denyAll() // When some endpoints are under maintenance
                         .anyRequest().authenticated()
         );
         httpSecurity.sessionManagement(session ->
