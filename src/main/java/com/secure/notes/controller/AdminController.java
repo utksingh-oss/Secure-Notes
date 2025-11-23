@@ -12,9 +12,7 @@ import static com.secure.notes.constant.ControllerConstant.*;
 
 /*
  * This particular controller is under maintenance
- *
- * */
-
+ */
 @RestController
 @RequestMapping("/v1/admin")
 public class AdminController {
