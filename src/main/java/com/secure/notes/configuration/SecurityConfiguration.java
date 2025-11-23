@@ -20,7 +20,7 @@ public class SecurityConfiguration {
      */
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity.authorizeHttpRequests((request) -> request.anyRequest().authenticated());
+//      httpSecurity.authorizeHttpRequests((request) -> request.anyRequest().authenticated());
         httpSecurity.authorizeHttpRequests((requests) ->
                 requests
                         .requestMatchers("/v1/hello/about").permitAll()
