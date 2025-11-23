@@ -24,7 +24,7 @@ This generated password is for development use only. Your security configuration
 ```properties
 # Making Password Static as to not have it change with each run
 spring.security.user.name=admin
-spring.security.user.password=admin
+spring.security.user.password =admin
 ```
 ***
 #### Debugging
@@ -47,4 +47,35 @@ public interface AuthenticationManager {
 - `DaoAuthenticationProvider` is provided by Spring-Security by default
   - If the authentication password is matched the Authentication object is updated 
 - `DefaultLoginPageGeneratingFilter` class is responsible for generating the page initially loaded whenever APIs are called
+- `LogoutPageGeneratingWebFilter` generates the default logout page
 ***
+### Making call using client
+![img.png](note-img/img_3.png)
+![img_1.png](note-img/img_4.png)
+- Authorization is sent in an encoded format of Base64 like this `Authorization: Basic YWRtaW46YWRtaW4=`
+- When we decrypt it, it becomes `admin:admin`
+- Spring security internally handles this decrypting logic
+***
+### Key Filters
+1. `SecurityContextPersistenceFilter`: manages security context for each request
+2. `WebAsyncManagerIntegrationFilter`: integrates the SecurityContext with Spring's WebAsyncManager for asynchronous web requests.
+3. `HeaderWriterFilter`: Adds security related HTTP headers to the response, such as `X-Content-Type-Options`, `X-Frame-Options`, and `X-XSS-Protection`
+4. `CorsFilter`: Handles Cross-Origin resource sharing (CORS) by allowing or denying requests from different origins based on configured policies
+5. `CsrfFilter`: Enforces Cross-Site Request Forgery (CSRF) protection by generating and validating CSRF token for each request
+6. `LogoutFilter`: Manages the logout process by invalidating the session, clearing the cookies, and redirecting the user to a configured logout success URL.
+7. `UsernamePasswordAuthenticationFilter`: processes authentication requests for username and password credentials. It handles the form-based login process
+8. `DefaultLoginPageGeneratingFilter`: generates a default login page if no custom login page is provided
+9. `DefaultLogoutPageGeneratingFilter`: generates a default logout page if no custom logout page is provided
+10. `BasicAuthenticationFilter`: Handles HTTP Basic authentication by extracting credentials from the Authorization header and passing them to the authentication manager.
+11. `RequestCacheAwareFilter`: Ensures that the original requested URL is cached during authentication, so that the user can be redirected to it after successful authentication.
+12. `AnonymousAuthenticationFilter`: provides anonymous authentication for users who are not authenticated. This is useful to apply security constraints even to unauthenticated users.
+13. `ExceptionTranslationFilter`: Translates authentication and access-related exceptions into appropriate HTTP response, such as redirecting  to the login page or sending a 403 Forbidden status
+14. `FilterSecurityInterceptor`: Enforces security policy(authorization checks) on secured HTTP requests. It makes final access control decisions based on the configured security metadata and the current Authentication.
+
+***
+
+### JSessionID
+- cookie that is being created to manage sessions
+- once you have been authenticated you do not need to provide login username and password
+***
+
