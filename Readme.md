@@ -26,8 +26,25 @@ This generated password is for development use only. Your security configuration
 spring.security.user.name=admin
 spring.security.user.password=admin
 ```
-
+***
 #### Debugging
-- continue: https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118339#learning-tools
+- `AuthorizationFilter`: makes the url restricted
+  - `doFilter()` comes from the base class `GenericFilterBean`
+- `UsernamePasswordAuthenticationFilter`
+  - `return this.getAuthenticationManager().authenticate(authRequest);`
+  - Here `AuthenticationManager` interface implementation is used
 
+```java
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 
+public interface AuthenticationManager {
+    //..
+    Authentication authenticate(Authentication authentication) throws AuthenticationException;
+}
+```
+- `AuthenticationProvider` are usually tried in order until one provides a non-null response.
+- `DaoAuthenticationProvider` is provided by Spring-Security by default
+  - If the authentication password is matched the Authentication object is updated 
+- `DefaultLoginPageGeneratingFilter` class is responsible for generating the page initially loaded whenever APIs are called
+***
