@@ -84,5 +84,5 @@ public interface AuthenticationManager {
 - `SpringBootWebSecurityConfiguration`: default configuration for web security
   - If the user specifies their own `SecurityFilterChain` bean, this will back-off completely and the user should specify
   - all the bits they want to configure as part of the custom security configuration
-- 
+
 
