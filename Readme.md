@@ -77,6 +77,8 @@ public interface AuthenticationManager {
 ### JSessionID
 - cookie that is being created to manage sessions
 - once you have been authenticated you do not need to provide login username and password
+- it will be stored in the cookies
+- along with the login credentials, _csrf token is also sent in the request which is hidden by default
 ***
 
 ### Basic Authentication
