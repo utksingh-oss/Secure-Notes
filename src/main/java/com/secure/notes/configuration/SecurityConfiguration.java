@@ -12,15 +12,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-    /*
-     * All the HttpRequests need to be authorized
-     * httpSecurity.formLogin(withDefaults()); -- removed, enabled by default
-     * "/login" & "/logout" endpoints will be disabled
-     * We have disabled the session so JSessionId will not be maintained
-     */
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-//      httpSecurity.authorizeHttpRequests((request) -> request.anyRequest().authenticated());
         httpSecurity.authorizeHttpRequests((requests) ->
                 requests
                         .requestMatchers("/v1/hello/about").permitAll()

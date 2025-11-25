@@ -49,13 +49,16 @@ public interface AuthenticationManager {
 - `DefaultLoginPageGeneratingFilter` class is responsible for generatingSecurityContextPersistenceFilter the page initially loaded whenever APIs are called
 - `LogoutPageGeneratingWebFilter` generates the default logout page
 ***
+
 ### Making call using client
 ![img.png](note-img/img_3.png)
 ![img_1.png](note-img/img_4.png)
 - Authorization is sent in an encoded format of Base64 like this `Authorization: Basic YWRtaW46YWRtaW4=`
 - When we decrypt it, it becomes `admin:admin` `<username>:<password>`
 - Spring security internally handles this decrypting logic
+
 ***
+
 ### Key Filters
 1. `SecurityContextPersistenceFilter`: manages security context for each request
 2. `WebAsyncManagerIntegrationFilter`: integrates the SecurityContext with Spring's WebAsyncManager for asynchronous web requests.
@@ -86,6 +89,11 @@ public interface AuthenticationManager {
 - `SpringBootWebSecurityConfiguration`: default configuration for web security
   - If the user specifies their own `SecurityFilterChain` bean, this will back-off completely and the user should specify
   - all the bits they want to configure as part of the custom security configuration
+
+***
+### `@AuthenticationPrincipal`
+- It injects the information of the Authenticated user in the parameter
+
 
 
 Continue: https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118381#learning-tools
