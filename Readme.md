@@ -93,9 +93,16 @@ public interface AuthenticationManager {
 ***
 ### `@AuthenticationPrincipal`
 - It injects the information of the Authenticated user in the parameter
+***
+- By default, the Spring Security expects a _csrf token for all the requests trying to modify anything.
+***
+
+---
 
 
 
-Continue: https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118381#learning-tools
+Continue: https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118417#learning-tools
+
+
 
 

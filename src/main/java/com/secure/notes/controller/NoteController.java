@@ -1,7 +1,7 @@
 package com.secure.notes.controller;
 
 
-import com.secure.notes.model.Note;
+import com.secure.notes.dto.NotesDto;
 import com.secure.notes.service.NoteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,24 +25,24 @@ public class NoteController {
     }
 
     @PostMapping
-    public Note createNote(@RequestBody String content,
-                           @AuthenticationPrincipal UserDetails userDetails) {
+    public NotesDto createNote(@RequestBody String content,
+                               @AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
         logUserDetails(userDetails);
         return noteService.createNoteForUser(username, content);
     }
 
     @GetMapping
-    public List<Note> getUserNotes(@AuthenticationPrincipal UserDetails userDetails) {
+    public List<NotesDto> getUserNotes(@AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
         logUserDetails(userDetails);
         return noteService.getNotesForUser(username);
     }
 
     @PutMapping("/{noteId}")
-    public Note updateNote(@PathVariable Long noteId,
-                           @RequestBody String content,
-                           @AuthenticationPrincipal UserDetails userDetails) {
+    public NotesDto updateNote(@PathVariable Long noteId,
+                               @RequestBody String content,
+                               @AuthenticationPrincipal UserDetails userDetails) {
         String username = userDetails.getUsername();
         logUserDetails(userDetails);
         return noteService.updateNoteForUser(noteId, content, username);

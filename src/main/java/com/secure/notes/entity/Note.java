@@ -1,4 +1,4 @@
-package com.secure.notes.model;
+package com.secure.notes.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,6 +11,7 @@ public class Note {
     private Long id;
 
     @Lob
+//    @Column(columnDefinition = "TEXT")    // for large Strings
     private String content;
 
     private String ownerUsername;

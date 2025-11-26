@@ -1,9 +1,11 @@
 package com.secure.notes.service.impl;
 
+import com.secure.notes.dto.NotesDto;
 import com.secure.notes.exception.NoteNotFoundException;
-import com.secure.notes.model.Note;
+import com.secure.notes.entity.Note;
 import com.secure.notes.repository.NoteRepository;
 import com.secure.notes.service.NoteService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,20 +21,22 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public Note createNoteForUser(String username, String content) {
+    public NotesDto createNoteForUser(String username, String content) {
         Note note = new Note();
         note.setContent(content);
         note.setOwnerUsername(username);
-        return noteRepository.save(note);
+        Note savedNote = noteRepository.save(note);
+        return new NotesDto(savedNote);
     }
 
     @Override
-    public Note updateNoteForUser(Long noteId, String content, String username) {
+    public NotesDto updateNoteForUser(Long noteId, String content, String username) {
         Note note = noteRepository.findById(noteId).orElseThrow(
                 () -> new NoteNotFoundException(noteId)
         );
         note.setContent(content);
-        return noteRepository.save(note);
+        Note savedNote = noteRepository.save(note);
+        return new NotesDto(savedNote);
     }
 
     @Override
@@ -41,7 +45,9 @@ public class NoteServiceImpl implements NoteService {
     }
 
     @Override
-    public List<Note> getNotesForUser(String username) {
-        return noteRepository.findByOwnerUsername(username);
+    @Transactional
+    public List<NotesDto> getNotesForUser(String username) {
+        List<Note> notes = noteRepository.findByOwnerUsername(username);
+        return notes.stream().map(NotesDto::new).toList();
     }
 }
