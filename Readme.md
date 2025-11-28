@@ -26,7 +26,7 @@ This generated password is for development use only. Your security configuration
 spring.security.user.name=admin
 spring.security.user.password =admin
 ```
-***
+---
 #### Debugging
 - `AuthorizationFilter`: makes the url restricted
   - `doFilter()` comes from the base class `GenericFilterBean`
@@ -48,7 +48,7 @@ public interface AuthenticationManager {
   - If the authentication password is matched the Authentication object is updated 
 - `DefaultLoginPageGeneratingFilter` class is responsible for generatingSecurityContextPersistenceFilter the page initially loaded whenever APIs are called
 - `LogoutPageGeneratingWebFilter` generates the default logout page
-***
+---
 
 ### Making call using client
 ![img.png](note-img/img_3.png)
@@ -57,7 +57,7 @@ public interface AuthenticationManager {
 - When we decrypt it, it becomes `admin:admin` `<username>:<password>`
 - Spring security internally handles this decrypting logic
 
-***
+---
 
 ### Key Filters
 1. `SecurityContextPersistenceFilter`: manages security context for each request
@@ -75,14 +75,14 @@ public interface AuthenticationManager {
 13. `ExceptionTranslationFilter`: Translates authentication and access-related exceptions into appropriate HTTP response, such as redirecting  to the login page or sending a 403 Forbidden status
 14. `FilterSecurityInterceptor`: Enforces security policy(authorization checks) on secured HTTP requests. It makes final access control decisions based on the configured security metadata and the current Authentication.
 
-***
+---
 
 ### JSessionID
 - cookie that is being created to manage sessions
 - once you have been authenticated you do not need to provide login username and password
 - it will be stored in the cookies
 - along with the login credentials, _csrf token is also sent in the request which is hidden by default
-***
+---
 
 ### Basic Authentication
 - username:password -> Base64 Encoding -> Authorization Header Basic <base64 encoded value>
@@ -90,14 +90,63 @@ public interface AuthenticationManager {
   - If the user specifies their own `SecurityFilterChain` bean, this will back-off completely and the user should specify
   - all the bits they want to configure as part of the custom security configuration
 
-***
+---
 ### `@AuthenticationPrincipal`
 - It injects the information of the Authenticated user in the parameter
-***
+---
 - By default, the Spring Security expects a _csrf token for all the requests trying to modify anything.
-***
+---
 
 ---
+### Authentication Provider
+- Authenticate the user 
+- Create the authentication token
+#### Importance :
+1. Flexibility
+2. Separation of Concerns
+3. Extensibility 
+4. Security
+
+### Implementations of `AuthenticationProvider`
+1. `DaoAuthenticationProvider`: Default
+2. `InMemoryAuthenticationProvider` : Simple, good for POC
+3. `LdapAuthenticationProvider`
+4. `ActiveDirectoryLdapAuthenticationProvier`
+5. `PreAuthenticatedAuthenticationProvider`: For Single Sign-on
+6. `OAuth2AuthenticationProvider`
+---
+
+### UserDetails
+- Stores user level logging information
+```java
+String getUsername();
+String getPassword();
+Collection<? extends GrantedAuthority> getAuthorities();
+boolean isAccountNonExpired();
+boolean isAccountNonLocked();
+boolean isCredentialsNonExpired();
+boolean isEnabled();
+```
+- `User` is concrete implementation of `UserDetails` interface provided by Spring Security
+
+### UserDetailsService
+- The `UserDetailsService` interface is responsible for retrieving user-related data.
+- It has a single method that loads a user based on the username and returns a `UserDetails` object
+
+```java
+UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+```
+### UserDetailsManager
+- The `UserDetailsManager` interface in Spring Security extends, `UserDetailsService` and provides additional methods for managing user accounts.
+- It has all the queries built in the class
+- Two implementations : `JdbcUserDetailsManager` & `InMemoryUserDetailsManager`
+---
+
+``` 
+create table users(username varchar_ignorecase(50) not null primary key,password varchar_ignorecase(500) not null,enabled boolean not null);
+create table authorities (username varchar_ignorecase(50) not null,authority varchar_ignorecase(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
+create unique index ix_auth_username on authorities (username,authority);
+```
 
 
 
