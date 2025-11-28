@@ -5,7 +5,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
+import javax.sql.DataSource;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -15,11 +19,17 @@ public class SecurityConfiguration {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.authorizeHttpRequests(requests ->
-                requests.anyRequest().authenticated()
-        );
+        httpSecurity.authorizeHttpRequests(requests -> {
+            requests.anyRequest().authenticated();
+        });
         httpSecurity.csrf(AbstractHttpConfigurer::disable);
         httpSecurity.httpBasic(withDefaults());
         return httpSecurity.build();
     }
+
+    @Bean
+    public UserDetailsManager userDetailsService(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
+    }
+
 }
