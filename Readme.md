@@ -198,6 +198,14 @@ create unique index ix_auth_username on authorities (username,authority);
 ![img.png](note-img/img_5.png)
 
 
+### Why Custom User Model
+- Extended User information
+- Domain-specific requirements
+- Custom Authentication & Authorization logic
+- Integration with other systems
+- Enhanced Security
+
+
 Continue: https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118417#learning-tools
 
 
