@@ -1,6 +1,6 @@
 package com.secure.notes;
 
-import com.secure.notes.service.impl.security.SecurityUserSetupService;
+import com.secure.notes.security.service.SecurityUserSetupService;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,8 +28,8 @@ public class NotesApplication {
     }
 
     @Bean
-    public ApplicationRunner initializeUsers(SecurityUserSetupService setupService) {
-        return args -> setupService.createDefaultUsers();
+    public ApplicationRunner initializeUsers(SecurityUserSetupService securityUserSetupService) {
+        return args -> securityUserSetupService.createDefaultUsers();
     }
 
 }

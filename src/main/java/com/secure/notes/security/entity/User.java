@@ -1,4 +1,4 @@
-package com.secure.notes.entity;
+package com.secure.notes.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;

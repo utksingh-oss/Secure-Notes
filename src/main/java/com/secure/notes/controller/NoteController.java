@@ -1,7 +1,7 @@
 package com.secure.notes.controller;
 
 
-import com.secure.notes.dto.NotesDto;
+import com.secure.notes.model.NotesDto;
 import com.secure.notes.service.NoteService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

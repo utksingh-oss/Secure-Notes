@@ -1,6 +1,6 @@
 package com.secure.notes.service.impl;
 
-import com.secure.notes.dto.NotesDto;
+import com.secure.notes.model.NotesDto;
 import com.secure.notes.exception.NoteNotFoundException;
 import com.secure.notes.entity.Note;
 import com.secure.notes.repository.NoteRepository;

@@ -1,4 +1,4 @@
-package com.secure.notes.dto;
+package com.secure.notes.model;
 
 import com.secure.notes.entity.Note;
 import lombok.Data;

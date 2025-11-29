@@ -206,6 +206,8 @@ create unique index ix_auth_username on authorities (username,authority);
 - Enhanced Security
 
 
+![img.png](img.png)
+
 Continue: https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118461#learning-tools
 ---
 

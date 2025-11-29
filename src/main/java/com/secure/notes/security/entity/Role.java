@@ -1,7 +1,7 @@
-package com.secure.notes.entity;
+package com.secure.notes.security.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.secure.notes.enums.AppRole;
+import com.secure.notes.security.enums.AppRole;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.Set;
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "roleId")
+    @Column(name = "role_id")
     private Integer roleId;
 
     @ToString.Exclude
