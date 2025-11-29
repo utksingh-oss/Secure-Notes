@@ -208,6 +208,17 @@ create unique index ix_auth_username on authorities (username,authority);
 
 ![img.png](img.png)
 
+
+### Inbuild Classes for Authorizations
+- `GrantedAuthority` (Interface) -> `SimpleGrantedAuthority` (Implementation)
+
+### Method Level Security
+- `@PreAuthorize`
+- `@Secured`
+- `@RolesAllowed`
+- `@PostAuthorize`
+- `@PreFilter and @PostFilter`
+
 Continue: https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118461#learning-tools
 ---
 
