@@ -6,6 +6,7 @@ import com.secure.notes.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,7 +22,8 @@ public class AdminController {
         this.userService = userService;
     }
 
-    @GetMapping("/getusers")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/get-users")
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
