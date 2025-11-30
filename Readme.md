@@ -222,6 +222,18 @@ The `@PreAuthorize("hasRole('ROLE_ADMIN')")` can be added at a class level as we
 All the endpoints in the controller will need to have that authorization
 All the other Annotations as well can be used at both class and method levels.
 ---
+### Password Encoder
+```java
+public interface PasswordEncoder {
+    String encode(CharSequence rawPassword);
+    boolean matches(CharSequence rawPassword, String encodedPassword);
+}
+```
+- There are many implementations for the interface implementing different Hashing Algorithms
+- `BcryptPasswordEncoder` is the most used implementation as it balances between performance and security
+- 
+
+---
 - https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118497#learning-tools
 ---
 

@@ -8,6 +8,7 @@ import com.secure.notes.security.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -17,16 +18,18 @@ import java.util.List;
 public class SecurityUserSetupService {
     private final RoleRepository roleRepository;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     private static final String DEFAULT_SIGNUP_METHOD = "email";
     private final List<UserDetail> userDetailList = List.of(
-            new UserDetail("user1", "user1@example.com", "{noop}password1", AppRole.ROLE_USER),
-            new UserDetail("admin", "admin@example.com", "{noop}adminPass", AppRole.ROLE_ADMIN)
+            new UserDetail("user1", "user1@example.com", "password1", AppRole.ROLE_USER),
+            new UserDetail("admin", "admin@example.com", "adminPass", AppRole.ROLE_ADMIN)
     );
 
     @Autowired
-    public SecurityUserSetupService(RoleRepository roleRepository, UserRepository userRepository) {
+    public SecurityUserSetupService(RoleRepository roleRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.roleRepository = roleRepository;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -41,7 +44,11 @@ public class SecurityUserSetupService {
         Role userRole = roleRepository.findByRoleName(userDetail.appRole)
                 .orElseGet(() -> roleRepository.save(new Role(userDetail.appRole)));
         if (!userRepository.existsByUsername(userDetail.username)) {
-            User user = new User(userDetail.username, userDetail.emailId, userDetail.password);
+            User user = new User(
+                    userDetail.username,
+                    userDetail.emailId,
+                    passwordEncoder.encode(userDetail.password)
+            );
             populateUserFieldsWithDefaultValues(user);
             user.setRole(userRole);
             userRepository.save(user);

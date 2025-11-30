@@ -54,6 +54,7 @@ public class UserDetailsImpl implements UserDetails {
         );
     }
 
+    @NotNull
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
