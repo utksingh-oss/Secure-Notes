@@ -32,7 +32,6 @@ spring.security.user.password=admin
 ```
 
 ---
-
 #### Debugging
 
 - `AuthorizationFilter`: makes the url restricted
@@ -196,7 +195,7 @@ create unique index ix_auth_username on authorities (username,authority);
 ```
 
 ![img.png](note-img/img_5.png)
-
+---
 
 ### Why Custom User Model
 - Extended User information
@@ -205,21 +204,25 @@ create unique index ix_auth_username on authorities (username,authority);
 - Integration with other systems
 - Enhanced Security
 
-
+---
 ![img.png](img.png)
-
-
+---
 ### Inbuild Classes for Authorizations
 - `GrantedAuthority` (Interface) -> `SimpleGrantedAuthority` (Implementation)
 
 ### Method Level Security
+To use all these annotations you need to `@EnableMethodSecurity`
 - `@PreAuthorize`
 - `@Secured`
 - `@RolesAllowed`
 - `@PostAuthorize`
 - `@PreFilter and @PostFilter`
-
-Continue: https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118461#learning-tools
+---
+The `@PreAuthorize("hasRole('ROLE_ADMIN')")` can be added at a class level as well
+All the endpoints in the controller will need to have that authorization
+All the other Annotations as well can be used at both class and method levels.
+---
+- https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118497#learning-tools
 ---
 
 
