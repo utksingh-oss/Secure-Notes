@@ -116,7 +116,6 @@ public interface AuthenticationManager {
     - If the user specifies their own `SecurityFilterChain` bean, this will back-off completely and the user should
       specify
     - all the bits they want to configure as part of the custom security configuration
-
 ---
 
 ### `@AuthenticationPrincipal`
@@ -205,7 +204,7 @@ create unique index ix_auth_username on authorities (username,authority);
 - Enhanced Security
 
 ---
-![img.png](img.png)
+![img.png](note-img/img_6.png)
 ---
 ### Inbuild Classes for Authorizations
 - `GrantedAuthority` (Interface) -> `SimpleGrantedAuthority` (Implementation)
@@ -231,7 +230,7 @@ public interface PasswordEncoder {
 ```
 - There are many implementations for the interface implementing different Hashing Algorithms
 - `BcryptPasswordEncoder` is the most used implementation as it balances between performance and security
-- 
+
 
 ---
 - https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118497#learning-tools
