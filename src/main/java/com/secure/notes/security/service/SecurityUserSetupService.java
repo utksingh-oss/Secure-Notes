@@ -44,15 +44,19 @@ public class SecurityUserSetupService {
         Role userRole = roleRepository.findByRoleName(userDetail.appRole)
                 .orElseGet(() -> roleRepository.save(new Role(userDetail.appRole)));
         if (!userRepository.existsByUsername(userDetail.username)) {
-            User user = new User(
-                    userDetail.username,
-                    userDetail.emailId,
-                    passwordEncoder.encode(userDetail.password)
-            );
-            populateUserFieldsWithDefaultValues(user);
-            user.setRole(userRole);
-            userRepository.save(user);
+            createUser(userDetail, userRole);
         }
+    }
+
+    private void createUser(UserDetail userDetail, Role userRole) {
+        User user = new User(
+                userDetail.username,
+                userDetail.emailId,
+                passwordEncoder.encode(userDetail.password)
+        );
+        populateUserFieldsWithDefaultValues(user);
+        user.setRole(userRole);
+        userRepository.save(user);
     }
 
     private void populateUserFieldsWithDefaultValues(User user) {

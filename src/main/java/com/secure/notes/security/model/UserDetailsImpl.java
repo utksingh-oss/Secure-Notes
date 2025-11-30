@@ -28,12 +28,14 @@ public class UserDetailsImpl implements UserDetails {
     private boolean is2faEnabled;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id,
-                           String username,
-                           String email,
-                           String password,
-                           boolean is2faEnabled,
-                           Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(
+            Long id,
+            String username,
+            String email,
+            String password,
+            boolean is2faEnabled,
+            Collection<? extends GrantedAuthority> authorities
+    ) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -43,7 +45,10 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public static UserDetailsImpl build(User user) {
-        GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getRoleName().name());
+        GrantedAuthority authority =
+                new SimpleGrantedAuthority(
+                        user.getRole().getRoleName().name()
+                );
         return new UserDetailsImpl(
                 user.getUserId(),
                 user.getUsername(),

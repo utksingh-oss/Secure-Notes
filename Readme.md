@@ -232,12 +232,16 @@ public interface PasswordEncoder {
 - `BcryptPasswordEncoder` is the most used implementation as it balances between performance and security
 ---
 ### Filters
+
 - `FilterChainProxy` (Class)
 - `FilterChain` (Interface)
 - `VirtuaalFilterChain` (Internal Class in FilterChainProxy)
+
+---
+### CSRF (Cross-Site Request Forgery)
 - 
 ---
-- https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118531#learning-tools
+- https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118573#learning-tools
 ---
 
 
