@@ -230,10 +230,14 @@ public interface PasswordEncoder {
 ```
 - There are many implementations for the interface implementing different Hashing Algorithms
 - `BcryptPasswordEncoder` is the most used implementation as it balances between performance and security
-
-
 ---
-- https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118497#learning-tools
+### Filters
+- `FilterChainProxy` (Class)
+- `FilterChain` (Interface)
+- `VirtuaalFilterChain` (Internal Class in FilterChainProxy)
+- 
+---
+- https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118531#learning-tools
 ---
 
 
