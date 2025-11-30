@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin")
 public class AdminController {
-
     private final UserService userService;
 
     @Autowired
@@ -21,11 +20,13 @@ public class AdminController {
         this.userService = userService;
     }
 
+    @SuppressWarnings("NullableProblems")
     @GetMapping("/get-users")
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
+    @SuppressWarnings("NullableProblems")
     @PutMapping("/update-role")
     public ResponseEntity<String> updateUserRole(@RequestParam Long userId,
                                                  @RequestParam String roleName) {
@@ -33,6 +34,7 @@ public class AdminController {
         return ResponseEntity.ok("User role updated");
     }
 
+    @SuppressWarnings("NullableProblems")
     @GetMapping("/user/{id}")
     public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
         return new ResponseEntity<>(userService.getUserById(id), HttpStatus.OK);
