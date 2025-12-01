@@ -239,9 +239,12 @@ public interface PasswordEncoder {
 
 ---
 ### CSRF (Cross-Site Request Forgery)
-- 
 ---
-- https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45118573#learning-tools
+### JWT (Json-Web-Token)
+- `jwt.io`
+- `jjwt-api`, `jjwt-impl`, `jjwt-jackson`
+---
+- https://www.udemy.com/course/spring-security-6-with-reactjs-oauth2-jwt-multifactor-authentication/learn/lecture/45182251#learning-tools
 ---
 
 
