@@ -32,7 +32,6 @@ public class SecurityUserSetupService {
         this.passwordEncoder = passwordEncoder;
     }
 
-
     @Transactional
     public void createDefaultUsers() {
         for (UserDetail userDetail : userDetailList) {
@@ -49,11 +48,11 @@ public class SecurityUserSetupService {
     }
 
     private void createUser(UserDetail userDetail, Role userRole) {
-        User user = new User(
-                userDetail.username,
-                userDetail.emailId,
-                passwordEncoder.encode(userDetail.password)
-        );
+        User user = User.builder()
+                .username(userDetail.username)
+                .email(userDetail.emailId)
+                .password(passwordEncoder.encode(userDetail.password))
+                .build();
         populateUserFieldsWithDefaultValues(user);
         user.setRole(userRole);
         userRepository.save(user);

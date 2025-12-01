@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -15,13 +16,17 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class SecurityConfiguration {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf(csrf ->
+                csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                        .ignoringRequestMatchers("/api/auth/public/**") // disabling CSRF protection for the endpoints
+        );
         httpSecurity.authorizeHttpRequests(requests -> {
             requests
                     .requestMatchers("/api/admin/**").hasRole("ADMIN") //ROLE is automatically prepended
                     .requestMatchers("/api/public/**").permitAll()
+                    .requestMatchers("/api/csrf-token").permitAll()
                     .anyRequest().authenticated();
         });
-        httpSecurity.formLogin(withDefaults());
         httpSecurity.httpBasic(withDefaults());
         return httpSecurity.build();
     }
